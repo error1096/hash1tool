@@ -119,7 +119,7 @@ def md5CRACK (): #brutfroce DEF
 
 					break
 				else :
-					textBOX.insert(END,"tring \n")
+					textBOX.insert(END,"trying \n")
 			except :
 				pass
 
@@ -148,7 +148,7 @@ def sha1CRACK (): #brutfroce DEF
 
 					break
 				else :
-					textBOX.insert(END,"tring \n")
+					textBOX.insert(END,"trying \n")
 			except :
 				pass
 
