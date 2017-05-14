@@ -1,0 +1,231 @@
+#!/usr/bin/env python
+
+from Tkinter import *
+import ttk as tk1
+import md5,sha
+
+
+def help_ (): # help DEF
+
+	help_TK = Tk()
+	help_TK.title("help")
+
+	Label(help_TK,text="for making hash : \n just paste hash and chose your option \n for crack a hash : \n chose your option than enter followig cod \n your hash,wordlist.txt ").pack()
+
+	help_TK.mainloop()
+
+
+
+def error1096 (): # error1096 DEF
+	
+	error1096_TK = Tk()
+	error1096_TK.title("error1096")
+
+	#just simpel label simpel
+
+	Label(error1096_TK, text="""hello \n my name is error1096 \n and im a simpel \n programmer 
+if you nead any help contact \n me you can find my email address in \n contact menu """).pack()
+
+	Label(error1096_TK, text="""
+                                                        
+                 hello                                                
+                   my name                                         
+                     is error1096                                      
+                      and im a simpel                                     
+                        programmer                                    
+                        if                                     
+                        you nead                                   
+                         any help                                  
+                           contact                                 
+                             me you                                
+                              can find                              
+                               my email                           
+                                address in                           
+                                         
+""").pack()
+
+	error1096_TK.mainloop()
+
+def contactME ():# contact DEF
+	
+	contactME_TK = Tk()
+	contactME_TK.title("contact")
+
+	#just simpel label simpel
+
+	Label(contactME_TK,text="my GMAIL :",fg='red').grid(row=0,column=0)
+	Label(contactME_TK,text="assasin.shahin@gmail.com",fg='blue').grid(row=0,column=1)
+
+	Label(contactME_TK,text="GIThub :",fg='red').grid(row=1,column=0)
+	Label(contactME_TK,text="https://github.com/error1096",fg='blue').grid(row=1,column=1)
+
+	Label(contactME_TK,text="tw&instagram :",fg='red').grid(row=2,column=0)
+	Label(contactME_TK,text="error1096",fg='blue').grid(row=2,column=1)
+
+	contactME_TK.mainloop()
+root = Tk() # main page
+root.title('decryptEt00l')
+root.resizable(0,0)
+rootD = Frame(root)#bottom page
+rootD.pack(side=BOTTOM)
+
+menu =  Menu(root)#menu
+root.config(menu=menu)
+
+sMENU =  Menu(menu)#sube menu (help menu)
+menu.add_cascade(label="Help" , menu=sMENU)
+sMENU.add_command(label="Help",command=help_)
+
+s1MENU =  Menu(menu)#sube menu (about menu)
+menu.add_cascade(label="ABOUT ME" , menu=s1MENU)
+s1MENU.add_command(label="ERRO1096",command=error1096)#sube menu 1
+s1MENU.add_command(label="CONTACT ME.",command=contactME)#sube menu 2
+
+Ev2 = StringVar()#STRING
+
+def MD5m (): # this def is making md5 hash
+	HASHentry = Ev2.get()
+
+	textBOX.insert(END,md5.new(str(HASHentry).strip()).hexdigest())
+	textBOX.insert(END,"\n")
+
+def SH1M ():  # this def is making m hash
+	HASHentry = Ev2.get()
+	textBOX.insert(END,sha.new(str(HASHentry).strip()).hexdigest())
+	textBOX.insert(END,"\n")
+
+def md5CRACK (): #brutfroce DEF
+	HASHentryF = Ev2.get()
+
+	x = HASHentryF.split(",")
+
+	file = x[1]
+
+	h4sh = x[0]
+
+	counter = 0
+
+	with open(file,'r') as word:
+
+		for line  in word :
+
+			try:
+
+				if h4sh == md5.new(str(line).strip()).hexdigest() :
+
+					textBOX.insert(END," found > ")
+					textBOX.insert(END,line)
+					textBOX.insert(END,"\n")
+
+					break
+				else :
+					textBOX.insert(END,"tring \n")
+			except :
+				pass
+
+
+def sha1CRACK (): #brutfroce DEF
+	HASHentryF = Ev2.get()
+
+	x = HASHentryF.split(",")
+
+	file = x[1]
+
+	h4sh = x[0]
+
+
+	with open(file,'r') as word:
+
+		for line  in word :
+			
+			try :
+
+				if h4sh == sha.new(str(line).strip()).hexdigest() :
+
+					textBOX.insert(END," found > ")
+					textBOX.insert(END,line)
+					textBOX.insert(END,"\n")
+
+					break
+				else :
+					textBOX.insert(END,"tring \n")
+			except :
+				pass
+
+
+
+
+def exit (): #exit def
+	root.destroy()
+	minroot.destroy()
+
+
+Entry = Entry(root,width=34,textvariable=Ev2).pack()#hash entry 
+
+textBOX = Text(rootD,height=25,width=39)#output box
+textBOX.pack()
+
+
+#    -tool menu-  #
+minroot = Tk()
+minroot.resizable(0,0)
+minrootD = Frame(minroot)
+minrootD.pack(side=BOTTOM)
+
+
+minroot.title("option menu")#option menu 
+
+option_menu = LabelFrame(minroot, text="option menu") #option menu
+
+mmd5 = Checkbutton(option_menu,text="make MD5",command=MD5m).grid(row=0,column=0)# mack md5
+ms1 = Checkbutton(option_menu,text="make sha-1",command=SH1M).grid(row=1,column=0)# mack sh1
+cm5 = Checkbutton(option_menu,text="crack md5",command=md5CRACK).grid(row=2,column=0)# MAX OF N&L CHECKBTTON 
+cs1 = Checkbutton(option_menu,text="crack sha1",command=sha1CRACK).grid(row=3,column=0)# MAX OF N&L CHECKBTTON 
+
+
+
+STOP = tk1.Button(minrootD,text ="Exit",command=exit).pack(side=RIGHT)#exit button
+
+
+option_menu.pack(fill="both",expand='yes')
+
+
+txt_menu = LabelFrame(minroot, text="option menu") #file menu
+
+
+
+
+txt_menu.pack(fill="both",expand='yes')
+
+minroot.mainloop()
+
+root.mainloop()
+
+
+
+
+
+"""
+
+               z
+             z"F"$$.
+       -%- . Led$$$$P-
+              3$3 F3$%
+              " ^  .3""
+                 d***$$e.
+              r .%     ^"%
+              '$$r
+               3$$  *$*$$$$$
+                '$$. *b'b"$*$.
+                  *$. "L^L"b"$-
+                   "$b '. L^b^$
+                    ^$$bJ  \ b^$ .
+                    b *$$$b.\ \ b \
+                    *$."$$$$$b.. % %
+                    4$$r'$$b *$.%.\ ".
+                    ^$$  $$P  "$.'c^c"e
+                    4P"  $F%   '$.'c^r*$c
+                    $    $      '$.'c^c "$-
+                   $%   .$       '$.'L^b
+           J$$$$$$$$$$$$$$$$$$     *.JL.b    byERROR109      
+"""
